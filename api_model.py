@@ -46,7 +46,7 @@ class BaseQuery(object):
 
 	def _common_query(self, response: dict):
 
-		return response["data"]["axies"]["results"]
+		return response["data"]["axies"]["results"][0]
 	
 
 	def set_index(self, index=0):
@@ -164,7 +164,6 @@ class Auction(BaseQuery):
 		return str(self.auction["currentPrice"])
 
 
-
 class Parts(BaseQuery):
 
 
@@ -176,6 +175,4 @@ class Parts(BaseQuery):
 
 
 	def get_parts(self) -> dict:
-
-		return self.parts["parts"]
-
+		return [{"name":part["name"], "body-part":part["type"]} for part in self.parts["parts"]]
