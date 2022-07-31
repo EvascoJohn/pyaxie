@@ -12,7 +12,7 @@ class Axie(BasicInfo, Auction, Parts):
         super().__init__(response)
     
 
-    def if_price_usd(self, price):
+    async def if_price_usd(self, price):
 
         if float(self.get_price_usd()) <= price:
             return self
@@ -20,14 +20,14 @@ class Axie(BasicInfo, Auction, Parts):
         return False
     
 
-    def if_eyes(self, eye):
+    async def if_eyes(self, eye):
         
         if(eye == self.get_parts()[0]):
             return self
 
         return False
     
-    def if_parts(self, parts):
+    async def if_parts(self, parts):
 
         for part in self.get_parts():
             if(parts == part):
