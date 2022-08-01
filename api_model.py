@@ -3,11 +3,17 @@ import json
 
 class ApiJSON(object):
 
+
 	def __init__(self):
+
 		self._json_body = {
+
 				"operationName": None,
+
 				"variables": None,
+
 				"query": None
+
 				}
 
 
@@ -17,6 +23,7 @@ class GetBaseClass(ApiJSON):
 	_query = None
 
 	_operation_name = None
+
 
 	def __init__(self, dictionary: dict):
 
@@ -31,32 +38,10 @@ class GetBaseClass(ApiJSON):
 		self.json_body["query"] = self._query
 
 
+
 	def get_json(self) -> str:
 
 		return self.json_body
-
-
-
-class BaseQuery(object):
-
-	def __init__(self, response: dict):
-
-		self.response = response
-		self._index = 0
-
-	def _common_query(self, response: dict):
-
-		return response["data"]["axies"]["results"][0]
-	
-
-	def set_index(self, index=0):
-		print("INDEX", index)
-		self._index = index
-
-	
-	def get_response(self):
-		return self._common_query(self.response)
-
 
 
 class GetAxieBriefList(GetBaseClass):
@@ -83,9 +68,11 @@ class GetAxieBriefList(GetBaseClass):
 
 	_operation_name = "GetAxieBriefList"
 
+
 	def __init__(self, dictionary:dict):
 
 		super().__init__(dictionary)
+
 
 
 
@@ -113,66 +100,9 @@ class GetAxieLatest(GetBaseClass):
 
 	_operation_name = "GetAxieLatest"
 
+
 	def __init__(self, dictionary:dict):
+
 		super().__init__(dictionary)
-		self.size = dictionary["size"]
 
 
-class BasicInfo(BaseQuery):
-
-	def __init__(self, response: dict):
-
-		super().__init__(response)
-
-		self.basic_info = super()._common_query(response)
-
-
-	def get_name(self) -> str:
-		return self.basic_info["name"]
-
-
-	def get_id(self) -> str:
-		return self.basic_info["id"]
-
-
-	def get_stage(self) -> str:
-		return self.basic_info["stage"]
-
-
-	def get_class(self) -> str:
-		return self.basic_info["class"]
-
-
-
-class Auction(BaseQuery):
-
-
-	def __init__(self, response: dict):
-
-		super().__init__(response)
-
-		self.auction = super()._common_query(response)["auction"]
-
-
-	def get_price_usd(self) -> str:
-
-		return str(self.auction["currentPriceUSD"])
-
-
-	def get_price(self) -> str:
-
-		return str(self.auction["currentPrice"])
-
-
-class Parts(BaseQuery):
-
-
-	def __init__(self, response: dict):
-
-		super().__init__(response)
-
-		self.parts = self._common_query(response)
-
-
-	def get_parts(self) -> dict:
-		return [{"name":part["name"], "body-part":part["type"]} for part in self.parts["parts"]]
