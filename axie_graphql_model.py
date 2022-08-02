@@ -3,8 +3,16 @@ import json
 
 class ApiJSON(object):
 
+	"""
+		The GraphQL takes a specific format of JSON that it understands in order to give back data.
+		this object holds the base format of what the GraphQL takes.
+	"""
 
 	def __init__(self):
+
+		"""
+			Initializes _json_body.   
+		"""
 
 		self._json_body = {
 
@@ -20,12 +28,18 @@ class ApiJSON(object):
 
 class GetBaseClass(ApiJSON):
 
+
+	"""
+		This class is inherited for all post queries. This class Holds all the similarities of the post queries.
+	"""
+
 	_query = None
 
 	_operation_name = None
 
 
 	def __init__(self, dictionary: dict):
+
 
 		super().__init__()
 

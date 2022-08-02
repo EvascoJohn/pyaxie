@@ -1,4 +1,13 @@
+import sys
+sys.tracebacklimit=3
+
 class Axie:
+
+    """
+    
+        Takes the dictionary and turns it into an object.
+
+    """
 
     def __init__(self, dictionary=None):
         self.dictionary = dictionary
