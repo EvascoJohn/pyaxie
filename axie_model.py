@@ -1,6 +1,3 @@
-import sys
-sys.tracebacklimit=3
-
 class Axie:
 
     """
